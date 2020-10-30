@@ -6,61 +6,117 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Home from "./pages/home";
-import About from "./pages/lookup";
+import DailyShop from "./pages/dailyShop";
+import Lookup from "./pages/lookup";
 import UpcomingItems from "./pages/upcomingItems";
 
 import { Feather } from "@expo/vector-icons";
+import Details from "./pages/details";
 
-const Stack = createStackNavigator();
+const DailyShopStack = createStackNavigator();
+const UpcomingItemsStack = createStackNavigator();
+const LookupStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const Tabs = () => {
+const DailyShopStackScreen = () => {
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-          switch (route.name) {
-            case "Daily Shop":
-              iconName = "shopping-cart";
-              break;
-            case "Upcoming Items":
-              iconName = "calendar";
-              break;
-            case "Lookup":
-              iconName = "search";
-              break;
-          }
-          return <Feather name={iconName} size={size} color={color} />;
-        },
-      })}
-      tabBarOptions={{
-        activeTintColor: "#8b73bf",
-        inactiveTintColor: "gray",
-      }}
-    >
-      <Tab.Screen name="Daily Shop" component={Home} />
-      <Tab.Screen name="Upcoming Items" component={UpcomingItems} />
-      <Tab.Screen name="Lookup" component={About} />
-    </Tab.Navigator>
+    <DailyShopStack.Navigator>
+      <DailyShopStack.Screen
+        name="Daily Shop"
+        component={DailyShop}
+        options={{
+          headerStyle: { backgroundColor: "#8b73bf" },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+        }}
+      />
+      <DailyShopStack.Screen
+        name="Details"
+        component={Details} //
+        options={{
+          headerStyle: { backgroundColor: "#8b73bf" },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+        }}
+      />
+    </DailyShopStack.Navigator>
+  );
+};
+
+const UpcomingItemsStackScreen = () => {
+  return (
+    <UpcomingItemsStack.Navigator>
+      <UpcomingItemsStack.Screen
+        name="Upcoming Items"
+        component={UpcomingItems}
+        options={{
+          headerStyle: { backgroundColor: "#8b73bf" },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+        }}
+      />
+      <UpcomingItemsStack.Screen
+        name="Details"
+        component={Details}
+        options={{
+          headerStyle: { backgroundColor: "#8b73bf" },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+        }}
+      />
+    </UpcomingItemsStack.Navigator>
+  );
+};
+
+const LookupStackScreen = () => {
+  return (
+    <LookupStack.Navigator>
+      <LookupStack.Screen
+        name="Lookup"
+        component={Lookup}
+        options={{
+          headerStyle: { backgroundColor: "#8b73bf" },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+        }}
+      />
+    </LookupStack.Navigator>
   );
 };
 
 export default function App() {
   return (
     <NavigationContainer style={styles.container}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Fortnite Stats"
-          component={Tabs}
-          options={{
-            headerStyle: { backgroundColor: "#8b73bf" },
-            headerTintColor: "#fff",
-            headerTitleAlign: "center",
-          }}
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            switch (route.name) {
+              case "Daily Shop":
+                iconName = "shopping-cart";
+                break;
+              case "Upcoming Items":
+                iconName = "calendar";
+                break;
+              case "Lookup":
+                iconName = "search";
+                break;
+            }
+            return <Feather name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: "#8b73bf",
+          inactiveTintColor: "gray",
+        }}
+      >
+        <Tab.Screen name="Daily Shop" component={DailyShopStackScreen} />
+        <Tab.Screen
+          name="Upcoming Items"
+          component={UpcomingItemsStackScreen}
         />
-      </Stack.Navigator>
+        <Tab.Screen name="Lookup" component={LookupStackScreen} />
+      </Tab.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
   );

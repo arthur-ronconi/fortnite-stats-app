@@ -1,44 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
-export default function UpcomingItems({ navigation }) {
+export default function DailyShop({ navigation }) {
   // STATE
-  const [upcomingItems, setUpcomingItems] = useState([]);
+  const [dailyShop, setDailyShop] = useState([]);
 
   // API CALLS
-
-  const getUpcomingItemsData = async () => {
-    const response = await fetch(
-      "https://fortniteapi.io/v1/items/upcoming?lang=en",
-      {
-        method: "get",
-        headers: {
-          Authorization: "d4b0c477-a3bd4895-cf0dd77a-6d169cb7",
-        },
-      }
-    );
+  const getShopData = async () => {
+    const response = await fetch("https://fortniteapi.io/v1/shop?lang=en", {
+      method: "get",
+      headers: {
+        Authorization: "d4b0c477-a3bd4895-cf0dd77a-6d169cb7",
+      },
+    });
     const data = await response.json();
-    setUpcomingItems(await data.items); // FINAL ARRAY TO STATE VARIABLE
+    // console.log(await data.daily);
+    setDailyShop(await data.daily); // FINAL ARRAY TO STATE VARIABLE
   };
 
   // FIRE API CALL
   useEffect(() => {
-    getUpcomingItemsData();
+    getShopData();
   }, []);
 
   // RENDER
   return (
     <View style={styles.container}>
       <View style={styles.section}>
-        {/* <Text style={styles.sectionTitle}>Upcoming Items</Text> */}
+        {/* <Text style={styles.sectionTitle}>Daily Shop</Text> */}
         <FlatList
           style={styles.shopList}
-          data={upcomingItems}
+          data={dailyShop}
           renderItem={({ item }) => (
             <View style={styles.shopListItem} key={item.id}>
               <Image
-                source={{ uri: item.images.full_background }}
+                source={{ uri: item.full_background }}
                 style={{ height: 120, width: 120 }}
               />
               <View style={styles.shopListItemText}>
@@ -80,9 +77,7 @@ const styles = StyleSheet.create({
   },
   shopList: {
     flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    width: "100%",
+    // width: "100%",
     paddingHorizontal: 20,
   },
   shopListItem: {
