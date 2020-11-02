@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DailyShop from "./pages/dailyShop";
 import Lookup from "./pages/lookup";
 import UpcomingItems from "./pages/upcomingItems";
+import About from "./pages/about";
 
 import { Feather } from "@expo/vector-icons";
 import Details from "./pages/details";
@@ -16,6 +17,7 @@ import Details from "./pages/details";
 const DailyShopStack = createStackNavigator();
 const UpcomingItemsStack = createStackNavigator();
 const LookupStack = createStackNavigator();
+const MoreStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const DailyShopStackScreen = () => {
@@ -84,6 +86,22 @@ const LookupStackScreen = () => {
   );
 };
 
+const MoreStackScreen = () => {
+  return (
+    <MoreStack.Navigator>
+      <MoreStack.Screen
+        name="More"
+        component={About}
+        options={{
+          headerStyle: { backgroundColor: "#8b73bf" },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+        }}
+      />
+    </MoreStack.Navigator>
+  );
+};
+
 export default function App() {
   return (
     <NavigationContainer style={styles.container}>
@@ -101,6 +119,8 @@ export default function App() {
               case "Lookup":
                 iconName = "search";
                 break;
+              case "More":
+                iconName = "more-horizontal";
             }
             return <Feather name={iconName} size={size} color={color} />;
           },
@@ -116,6 +136,7 @@ export default function App() {
           component={UpcomingItemsStackScreen}
         />
         <Tab.Screen name="Lookup" component={LookupStackScreen} />
+        <Tab.Screen name="More" component={MoreStackScreen} />
       </Tab.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
