@@ -7,8 +7,9 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
-import { Picker } from "@react-native-picker/picker";
+// import { Picker } from "@react-native-picker/picker";
 import { Feather } from "@expo/vector-icons";
+import { StatsList } from "../../components/StatsList";
 
 export default function Lookup() {
   const [platform, setPlatform] = useState({
@@ -102,22 +103,54 @@ export default function Lookup() {
           )}
         </TouchableOpacity>
       </View>
-      <View>{accountID ? <Text>{accountID}</Text> : <View />}</View>
       {userData ? (
-        <View>
-          <Text>{userData.name}</Text>
+        <ScrollView style={styles.resultContainer}>
+          <Text style={styles.resultName}>{userData.name}</Text>
           {userData.account.level ? (
-            <Text>{userData.account.level}</Text>
+            <Text style={styles.resultLevel}>
+              Account level:{" "}
+              <Text style={styles.resultLevelNumber}>
+                {userData.account.level}
+              </Text>
+            </Text>
           ) : (
-            <Text>level unavailable</Text>
+            <Text style={styles.resultLevel}>
+              Account level:{" "}
+              <Text style={styles.resultLevelNumber}>Unavailable</Text>
+            </Text>
           )}
 
           {userData.global_stats ? (
-            <Text>{userData.global_stats.solo.kd}</Text>
+            <View>
+              <StatsList
+                title="Solo"
+                kd={userData.global_stats.solo.kd}
+                kills={userData.global_stats.solo.kills}
+                wins={userData.global_stats.solo.placetop1}
+                matchesPlayed={userData.global_stats.solo.matchesplayed}
+                playersOutlived={userData.global_stats.solo.playersoutlived}
+              />
+              <StatsList
+                title="Duo"
+                kd={userData.global_stats.duo.kd}
+                kills={userData.global_stats.duo.kills}
+                wins={userData.global_stats.duo.placetop1}
+                matchesPlayed={userData.global_stats.duo.matchesplayed}
+                playersOutlived={userData.global_stats.duo.playersoutlived}
+              />
+              <StatsList
+                title="Squad"
+                kd={userData.global_stats.squad.kd}
+                kills={userData.global_stats.squad.kills}
+                wins={userData.global_stats.squad.placetop1}
+                matchesPlayed={userData.global_stats.squad.matchesplayed}
+                playersOutlived={userData.global_stats.squad.playersoutlived}
+              />
+            </View>
           ) : (
-            <Text>kd unavailable</Text>
+            <Text>Stats unavailable</Text>
           )}
-        </View>
+        </ScrollView>
       ) : (
         <View />
       )}
@@ -173,5 +206,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     marginHorizontal: 8,
+  },
+  resultContainer: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  resultName: {
+    color: "#8b73bf",
+    fontSize: 40,
+    fontWeight: "bold",
+  },
+  resultLevel: {
+    color: "gray",
+    fontSize: 15,
+    marginBottom: 20,
+  },
+  resultLevelNumber: {
+    color: "#8b73bf",
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });

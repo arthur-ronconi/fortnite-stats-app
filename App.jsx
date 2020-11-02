@@ -90,7 +90,7 @@ const MoreStackScreen = () => {
   return (
     <MoreStack.Navigator>
       <MoreStack.Screen
-        name="More"
+        name="About"
         component={About}
         options={{
           headerStyle: { backgroundColor: "#8b73bf" },
@@ -119,7 +119,7 @@ export default function App() {
               case "Lookup":
                 iconName = "search";
                 break;
-              case "More":
+              case "About":
                 iconName = "more-horizontal";
             }
             return <Feather name={iconName} size={size} color={color} />;
@@ -136,7 +136,7 @@ export default function App() {
           component={UpcomingItemsStackScreen}
         />
         <Tab.Screen name="Lookup" component={LookupStackScreen} />
-        <Tab.Screen name="More" component={MoreStackScreen} />
+        <Tab.Screen name="About" component={MoreStackScreen} />
       </Tab.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
