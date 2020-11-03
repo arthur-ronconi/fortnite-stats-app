@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "react-navigation",
-    "slug": "react-navigation",
+    "name": "Fortnite Stats",
+    "slug": "fortnite-stats",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#8B73BF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -16,11 +16,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "android": {
+      "package": "com.arthurronconi.fortnitestats",
+      "versionCode": 2,
+      "permissions": []
     }
   }
 }
