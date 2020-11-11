@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
+import { AdMobBanner } from "expo-ads-admob";
 
 export default function About() {
   return (
@@ -14,6 +15,13 @@ export default function About() {
       <Text style={styles.aboutText}>
         App built by <Text style={{ fontWeight: "bold" }}>Arthur Ronconi</Text>
       </Text>
+      <AdMobBanner
+        bannerSize="largeBanner"
+        adUnitID="ca-app-pub-8278568013593627/4783825762" // Test ID, Replace with your-admob-unit-id
+        servePersonalizedAds // true or false
+        onDidFailToReceiveAdWithError={(err) => console.log(err)}
+        style={{ alignSelf: "center" }}
+      />
     </View>
   );
 }

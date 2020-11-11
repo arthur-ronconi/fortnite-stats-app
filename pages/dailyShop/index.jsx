@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { AdMobBanner } from "expo-ads-admob";
 
 export default function DailyShop({ navigation }) {
   // STATE
@@ -54,6 +55,13 @@ export default function DailyShop({ navigation }) {
           )}
         />
       </View>
+      <AdMobBanner
+        bannerSize="largeBanner"
+        adUnitID="ca-app-pub-8278568013593627/4783825762" // Test ID, Replace with your-admob-unit-id
+        servePersonalizedAds // true or false
+        onDidFailToReceiveAdWithError={(err) => console.log(err)}
+        style={{ alignSelf: "center" }}
+      />
     </View>
   );
 }

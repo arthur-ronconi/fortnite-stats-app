@@ -10,6 +10,7 @@ import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 // import { Picker } from "@react-native-picker/picker";
 import { Feather } from "@expo/vector-icons";
 import { StatsList } from "../../components/StatsList";
+import { AdMobBanner } from "expo-ads-admob";
 
 export default function Lookup() {
   const [platform, setPlatform] = useState({
@@ -102,6 +103,13 @@ export default function Lookup() {
             </View>
           )}
         </TouchableOpacity>
+        <AdMobBanner
+          bannerSize="largeBanner"
+          adUnitID="ca-app-pub-8278568013593627/4783825762" // Test ID, Replace with your-admob-unit-id
+          servePersonalizedAds // true or false
+          onDidFailToReceiveAdWithError={(err) => console.log(err)}
+          style={{ alignSelf: "center", marginTop: 20 }}
+        />
       </View>
       {userData ? (
         <ScrollView style={styles.resultContainer}>

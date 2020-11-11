@@ -18,8 +18,11 @@
     ],
     "android": {
       "package": "com.arthurronconi.fortnitestats",
-      "versionCode": 2,
-      "permissions": []
+      "versionCode": 5,
+      "permissions": [],
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-8278568013593627~8033300472"
+      }
     }
   }
 }

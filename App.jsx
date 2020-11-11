@@ -10,9 +10,9 @@ import DailyShop from "./pages/dailyShop";
 import Lookup from "./pages/lookup";
 import UpcomingItems from "./pages/upcomingItems";
 import About from "./pages/about";
+import Details from "./pages/details";
 
 import { Feather } from "@expo/vector-icons";
-import Details from "./pages/details";
 
 const DailyShopStack = createStackNavigator();
 const UpcomingItemsStack = createStackNavigator();

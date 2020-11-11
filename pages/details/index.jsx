@@ -1,6 +1,8 @@
 import React from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
 import { capitalize } from "../../utils/capitalize";
+import { AdMobBanner } from "expo-ads-admob";
+
 export default function Details({ route }) {
   const item = route.params.item;
   // console.log(route.params.item);
@@ -35,6 +37,13 @@ export default function Details({ route }) {
           Description: "{item.description}"
         </Text>
       </View>
+      <AdMobBanner
+        bannerSize="largeBanner"
+        adUnitID="ca-app-pub-8278568013593627/4783825762" // Test ID, Replace with your-admob-unit-id
+        servePersonalizedAds // true or false
+        onDidFailToReceiveAdWithError={(err) => console.log(err)}
+        style={{ alignSelf: "center", marginTop: 20 }}
+      />
     </View>
   );
 }
